@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>About Us - ShopSphere</title>
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    .about-title {
+      background-color: green;
+      padding: 1rem;
+      text-align: center;
+      color: white;
+      font-size: 28px;
+      font-weight: bold;
+    }
+
+    .about-nav {
+      display: flex;
+      justify-content: center;
+      background-color: orange;
+      padding: 1rem;
+      gap: 30px;
+      flex-wrap: wrap;
+    }
+
+    .about-nav a {
+      color: white;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 18px;
+      transition: color 0.3s;
+      cursor: pointer;
+    }
+
+    .about-nav a:hover {
+      color: #f0f0f0;
+    }
+
+    .about-content {
+      padding: 2rem;
+      font-size: 18px;
+      display: none;
+    }
+
+    .about-content.active {
+      display: block;
+    }
+
+    ul {
+      list-style: disc;
+      padding-left: 20px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="header">
+    <div class="header-left">
+      <img src="images/logo.jpeg" alt="ShopSphere Logo" class="logo" />
+      <h1>ShopSphere</h1>
+    </div>
+    <div class="header-right">
+      <a href="index.html">Home</a>
+      <a href="product.html">Products</a>
+      <a href="about.html" class="active">About</a>
+    </div>
+  </header>
+
+  <!-- Title -->
+  <div class="about-title">
+    <h2>About Us</h2>
+  </div>
+
+  <!-- Navigation Bar -->
+  <nav class="about-nav" id="aboutNav">
+    <a onclick="showContent('work')">Work Distribution and Roles</a>
+    <a onclick="showContent('highlights')">Project Highlights</a>
+    <a onclick="showContent('challenges')">Challenges Faced</a>
+    <a onclick="showContent('references')">References</a>
+    <a onclick="showContent('members')">Group Members</a>
+  </nav>
+
+  <!-- Content Sections -->
+  <section class="about-content" id="work">
+    <h3>Work Distribution and Roles</h3>
+    <p><strong>Sujan Prajapati:</strong> Frontend UI design, HTML/CSS/JavaScript development.</p>
+    <p><strong>Member 2:</strong> Backend PHP and MySQL integration.</p>
+    <p><strong>Member 3:</strong> Testing, bug fixing, and documentation.</p>
+  </section>
+
+  <section class="about-content" id="highlights">
+    <h3>Project Highlights</h3>
+    <ul>
+      <li>Animated featured products with slide transitions.</li>
+      <li>Responsive design for mobile and desktop.</li>
+      <li>Simple navigation and real-time product search.</li>
+    </ul>
+  </section>
+
+  <section class="about-content" id="challenges">
+    <h3>Challenges Faced</h3>
+    <ul>
+      <li>Ensuring cross-browser responsiveness.</li>
+      <li>Handling user sessions during login/logout.</li>
+      <li>Integrating cart functionality across pages.</li>
+    </ul>
+  </section>
+
+  <section class="about-content" id="references">
+    <h3>References</h3>
+    <ul>
+      <li>Logo Image: <a href="https://www.freepik.com/" target="_blank">Freepik</a></li>
+      <li>Product Images: <a href="https://www.pexels.com" target="_blank">Pexels</a></li>
+      <li>Icons: Unicode emojis and <a href="https://fontawesome.com" target="_blank">FontAwesome</a></li>
+      <li>Fonts: Google Fonts – Roboto, Poppins</li>
+    </ul>
+  </section>
+
+  <section class="about-content" id="members">
+    <h3>Group Members</h3>
+    <ul>
+      <li>Sujan Prajapati – 12345678</li>
+      <li>Member 2 – 23456789</li>
+      <li>Member 3 – 34567890</li>
+    </ul>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <p>&copy; 2025 ShopSphere. All rights reserved.</p>
+  </footer>
+
+  <!-- JS to Switch Content -->
+  <script>
+    function showContent(sectionId) {
+      document.getElementById("aboutNav").style.display = "none";
+      document.querySelectorAll(".about-content").forEach(section => {
+        section.classList.remove("active");
+      });
+      document.getElementById(sectionId).classList.add("active");
+    }
+  </script>
+
+</body>
+</html>

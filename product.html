@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>ShopSphere - Products</title>
+    <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+<header class="header">
+    <div class="header-left">
+        <img src="images/logo.jpeg" alt="ShopSphere Logo" class="logo" />
+        <h1>ShopSphere</h1>
+    </div>
+    <div class="header-center">
+        <input type="text" id="searchInput" placeholder="Search products..." />
+        <button onclick="searchProduct()">Search</button>
+    </div>
+    <div class="header-right">
+        <a href="cart.html" class="cart-link">🛒 Cart</a>
+        <button onclick="window.location.href='login.html'">Login</button>
+        <button onclick="window.location.href='register.html'">Register</button>
+    </div>
+</header>
+
+<nav class="nav-bar">
+    <ul class="nav-menu">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="product.html">Products</a></li>
+        <li><a href="about.html">About</a></li>
+    </ul>
+</nav>
+
+<section class="product-controls">
+    <label for="categoryFilter">Filter by Category:</label>
+    <select id="categoryFilter" onchange="filterProducts()">
+        <option value="all">All</option>
+        <option value="electronics">Electronics</option>
+        <option value="fashion">Fashion</option>
+        <option value="home">Home</option>
+    </select>
+
+    <label for="sortBy">Sort by:</label>
+    <select id="sortBy" onchange="sortProducts()">
+        <option value="default">Default</option>
+        <option value="priceAsc">Price: Low to High</option>
+        <option value="priceDesc">Price: High to Low</option>
+        <option value="nameAsc">Name: A-Z</option>
+        <option value="nameDesc">Name: Z-A</option>
+    </select>
+</section>
+
+<section class="product-grid" id="productContainer">
+    <!-- Example Products -->
+    <div class="product-card" data-category="electronics" data-price="59.99">
+        <img src="images/product1.jpeg" alt="Wireless Headphones" />
+        <h3>Wireless Headphones</h3>
+        <p>$59.99</p>
+        <button>Add to Cart</button>
+    </div>
+
+    <div class="product-card" data-category="fashion" data-price="29.99">
+        <img src="images/product2.jpeg" alt="Sunglasses" />
+        <h3>Sunglasses</h3>
+        <p>$29.99</p>
+        <button>Add to Cart</button>
+    </div>
+
+    <div class="product-card" data-category="home" data-price="89.99">
+        <img src="images/product3.jpeg" alt="Table Lamp" />
+        <h3>Table Lamp</h3>
+        <p>$89.99</p>
+        <button>Add to Cart</button>
+    </div>
+</section>
+
+<footer class="footer">
+    <p>&copy; 2025 ShopSphere. All rights reserved.</p>
+</footer>
+
+<script>
+    function searchProduct() {
+        const query = document.getElementById("searchInput").value.toLowerCase();
+        const products = document.querySelectorAll(".product-card");
+        products.forEach(product => {
+            const name = product.querySelector("h3").innerText.toLowerCase();
+            product.style.display = name.includes(query) ? "block" : "none";
+        });
+    }
+
+    function filterProducts() {
+        const category = document.getElementById("categoryFilter").value;
+        const products = document.querySelectorAll(".product-card");
+        products.forEach(product => {
+            const matches = category === "all" || product.dataset.category === category;
+            product.style.display = matches ? "block" : "none";
+        });
+    }
+
+    function sortProducts() {
+        const container = document.getElementById("productContainer");
+        const sortValue = document.getElementById("sortBy").value;
+        const products = Array.from(container.querySelectorAll(".product-card"));
+
+        products.sort((a, b) => {
+            const priceA = parseFloat(a.dataset.price);
+            const priceB = parseFloat(b.dataset.price);
+            const nameA = a.querySelector("h3").innerText;
+            const nameB = b.querySelector("h3").innerText;
+
+            switch (sortValue) {
+                case "priceAsc": return priceA - priceB;
+                case "priceDesc": return priceB - priceA;
+                case "nameAsc": return nameA.localeCompare(nameB);
+                case "nameDesc": return nameB.localeCompare(nameA);
+                default: return 0;
+            }
+        });
+
+        // Re-append sorted products
+        container.innerHTML = "";
+        products.forEach(p => container.appendChild(p));
+    }
+</script>
+
+</body>
+</html>
